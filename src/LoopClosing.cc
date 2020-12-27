@@ -31,6 +31,7 @@
 #include<mutex>
 #include<thread>
 
+#include <unistd.h>
 
 namespace ORB_SLAM2
 {
@@ -222,6 +223,7 @@ bool LoopClosing::DetectLoop()
     else
     {
         return true;
+        //return false; //disable loop closure
     }
 
     mpCurrentKF->SetErase();
@@ -572,11 +574,16 @@ void LoopClosing::CorrectLoop()
     mpMatchedKF->AddLoopEdge(mpCurrentKF);
     mpCurrentKF->AddLoopEdge(mpMatchedKF);
 
-    // Launch a new thread to perform Global Bundle Adjustment
-    mbRunningGBA = true;
-    mbFinishedGBA = false;
-    mbStopGBA = false;
-    mpThreadGBA = new thread(&LoopClosing::RunGlobalBundleAdjustment,this,mpCurrentKF->mnId);
+    //Without BA
+    mbRunningGBA = false; 
+    mbFinishedGBA = true;
+    mbStopGBA = true;
+
+    //Launch a new thread to perform Global Bundle Adjustment
+    // mbRunningGBA = true; 
+    // mbFinishedGBA = false;
+    // mbStopGBA = false;
+    // mpThreadGBA = new thread(&LoopClosing::RunGlobalBundleAdjustment,this,mpCurrentKF->mnId);
 
     // Loop closed. Release Local Mapping.
     mpLocalMapper->Release();    

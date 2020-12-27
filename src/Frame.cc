@@ -22,6 +22,7 @@
 #include "Converter.h"
 #include "ORBmatcher.h"
 #include <thread>
+#include<iostream>
 
 namespace ORB_SLAM2
 {
@@ -82,6 +83,7 @@ Frame::Frame(const cv::Mat &imLeft, const cv::Mat &imRight, const double &timeSt
 
     N = mvKeys.size();
 
+
     if(mvKeys.empty())
         return;
 
@@ -136,6 +138,7 @@ Frame::Frame(const cv::Mat &imGray, const cv::Mat &imDepth, const double &timeSt
     ExtractORB(0,imGray);
 
     N = mvKeys.size();
+
 
     if(mvKeys.empty())
         return;
