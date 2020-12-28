@@ -1,4 +1,83 @@
-# ORB-SLAM2
+# ORB-SLAM2 (adapted from original README)
+
+# 1. Prerequisites
+We have tested the library in **Ubuntu 12.04**, **14.04**, **16.04** and **18.04**, but it should be easy to compile in other platforms. A powerful computer (e.g. i7) will ensure real-time performance and provide more stable and accurate results.
+
+## C++11 or C++0x Compiler
+We use the new thread and chrono functionalities of C++11.
+
+## Pangolin
+We use [Pangolin](https://github.com/stevenlovegrove/Pangolin) for visualization and user interface. Dowload and install instructions can be found at: https://github.com/stevenlovegrove/Pangolin.
+
+## OpenCV
+We use [OpenCV](http://opencv.org) to manipulate images and features. Dowload and install instructions can be found at: http://opencv.org. **Required at leat 2.4.3. Tested with OpenCV 2.4.11 and OpenCV 3.2**.
+
+## Eigen3
+Required by g2o (see below). Download and install instructions can be found at: http://eigen.tuxfamily.org. **Required at least 3.1.0**.
+
+## DBoW2 and g2o (Included in Thirdparty folder)
+We use modified versions of the [DBoW2](https://github.com/dorian3d/DBoW2) library to perform place recognition and [g2o](https://github.com/RainerKuemmerle/g2o) library to perform non-linear optimizations. Both modified libraries (which are BSD) are included in the *Thirdparty* folder.
+
+# 2. Building ORB-SLAM2 library and examples
+
+Clone the repository:
+```
+git clone https://github.com/yx0123/ORB_SLAM2.git ORB_SLAM2
+```
+
+We provide a script `build.sh` to build the *Thirdparty* libraries and *ORB-SLAM2*. Please make sure you have installed all required dependencies (see section 2). Execute:
+```
+cd ORB_SLAM2
+chmod +x build.sh
+./build.sh
+```
+
+This will create **libORB_SLAM2.so**  at *lib* folder and the executables **mono_tum**, **mono_kitti**, **rgbd_tum**, **stereo_kitti**, **mono_euroc** and **stereo_euroc** in *Examples* folder.
+
+# 3. Build ROS Examples
+
+### Building the nodes for mono, monoAR, stereo and RGB-D
+1. Add the path including *Examples/ROS/ORB_SLAM2* to the ROS_PACKAGE_PATH environment variable. Open .bashrc file and add at the end the following line. Replace PATH by the folder where you cloned ORB_SLAM2:
+
+  ```
+  export ROS_PACKAGE_PATH=${ROS_PACKAGE_PATH}:PATH/ORB_SLAM2/Examples/ROS
+  ```
+  
+2. Execute `build_ros.sh` script:
+
+  ```
+  chmod +x build_ros.sh
+  ./build_ros.sh
+  ```
+
+# 4. Usage
+- AirSim
+Modify the settings in `Camera_Setting` to match your camera. Then run
+```
+roscore
+```
+In a new terminal, run one of the following:
+
+ - Monocular:
+```
+rosrun ORB_SLAM2 Mono Vocabulary/ORBvoc.txt Camera_Settings/AirSim-Mono.yaml
+```
+- RGBD:
+```
+rosrun ORB_SLAM2 RGBD Vocabulary/ORBvoc.txt Camera_Settings/RGBD/AirSim-RGBD.yaml
+```
+- Stereo: 
+```
+rosrun ORB_SLAM3 Stereo Vocabulary/ORBvoc.txt Camera_Settings/RGBD/AirSim-RGBD.yaml false
+```
+Once ORB-SLAM2 has loaded the vocabulary, play your rosbag using 
+```
+rosbag play BAGFILE.bag
+```
+
+
+
+# Original README below
 **Authors:** [Raul Mur-Artal](http://webdiis.unizar.es/~raulmur/), [Juan D. Tardos](http://webdiis.unizar.es/~jdtardos/), [J. M. M. Montiel](http://webdiis.unizar.es/~josemari/) and [Dorian Galvez-Lopez](http://doriangalvez.com/) ([DBoW2](https://github.com/dorian3d/DBoW2))
 
 **13 Jan 2017**: OpenCV 3 and Eigen 3.3 are now supported.
