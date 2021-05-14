@@ -6,12 +6,12 @@ Before running, preprocess data using `create_timestamps_orb.py` from [this repo
 
 Run with: 
 ```
-$ cd ORB_SLAM2
-$ ./Examples/Monocular/mono_tum Vocabulary/ORBvoc.txt Examples/Monocular/TartanAir-Mono.yaml /PATH/TO/PARENT/OF/IMAGE/FOLDER 
+cd ORB_SLAM2
+./Examples/Monocular/mono_tum Vocabulary/ORBvoc.txt Examples/Monocular/TartanAir-Mono.yaml /PATH/TO/PARENT/OF/IMAGE/FOLDER 
 ```
 eg
 ```
-$ ./Examples/Monocular/mono_tum Vocabulary/ORBvoc.txt Examples/Monocular/TartanAir-Mono.yaml ~/16-833-Project-Datasets/eow_easy_P002/P002
+./Examples/Monocular/mono_tum Vocabulary/ORBvoc.txt Examples/Monocular/TartanAir-Mono.yaml ~/16-833-Project-Datasets/eow_easy_P002/P002
 ```
 
 
