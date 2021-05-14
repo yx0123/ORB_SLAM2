@@ -1,3 +1,20 @@
+# ORB-SLAM2 for TartanAir Dataset
+
+Refer to build instructions below.
+
+Before running, preprocess data using `create_timestamps_orb.py` from [this repository](https://github.com/yx0123/timestamp_generator.git) This will create a `rgb.txt` text file which should be placed in the same folder as `image_left` (eg `~/16-833-Project-Datasets/eow_easy_P002/P002/rgb.txt`)
+
+Run with: 
+```
+$ cd ORB_SLAM2
+$ ./Examples/Monocular/mono_tum Vocabulary/ORBvoc.txt Examples/Monocular/TartanAir-Mono.yaml /PATH/TO/PARENT/OF/IMAGE/FOLDER 
+```
+eg
+```
+$ ./Examples/Monocular/mono_tum Vocabulary/ORBvoc.txt Examples/Monocular/TartanAir-Mono.yaml ~/16-833-Project-Datasets/eow_easy_P002/P002
+```
+
+
 # ORB-SLAM2 (adapted from original README)
 
 # 1. Prerequisites
